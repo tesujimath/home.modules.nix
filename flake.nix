@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # TODO fold this back into nixpkgs once PR is merged:
-    nixpkgs-deno_292.url = "github:NixOS/nixpkgs/pull/539847/head";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +21,6 @@
         let
           flakePkgsForSystem = system: {
             bash-env-json = inputs.bash-env-json.packages.${system}.default;
-            deno_292 = inputs.nixpkgs-deno_292.legacyPackages.${system}.deno;
           };
         in
         {

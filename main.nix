@@ -18,7 +18,7 @@ in
     ./modules/spacehammer
     ./modules/helix.nix
     ./modules/homebrew.nix
-    (import ./modules/languages { inherit flakePkgs; })
+    ./modules/languages
     ./modules/mitmproxy
     ./modules/syncthing.nix
     ./modules/web-browser.nix

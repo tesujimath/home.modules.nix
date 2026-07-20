@@ -1,4 +1,3 @@
-{ flakePkgs }:
 { config, pkgs, lib, ... }:
 
 let
@@ -59,7 +58,7 @@ in
 {
   imports = [
     ./clojure
-    (import ./typescript { inherit flakePkgs; })
+    ./typescript
   ];
 
   options.tesujimath = {

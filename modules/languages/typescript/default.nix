@@ -1,4 +1,3 @@
-{ flakePkgs }:
 { config, pkgs, lib, ... }:
 
 let
@@ -29,7 +28,7 @@ in
           with pkgs;
           [
             biome
-            flakePkgs.deno_292
+            deno
             typescript-language-server
             rassumfrassum_034
           ] ++ (if config.tesujimath.zed-editor.enable then [
