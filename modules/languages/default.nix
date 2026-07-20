@@ -68,6 +68,8 @@ in
         packages = mkOption {
           type = lib.types.listOf lib.types.package;
           description = "Programming language support packages for combining";
+          internal = true;
+          visible = false;
           default = [ ];
         };
       };

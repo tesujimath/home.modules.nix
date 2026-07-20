@@ -1,9 +1,9 @@
-{ flakePkgsForSystem }:
+{ flakePkgsFor }:
 { config, lib, pkgs, ... }:
 
 let
   inherit (lib) mkOption types;
-  flakePkgs = flakePkgsForSystem pkgs.stdenv.hostPlatform.system;
+  flakePkgs = flakePkgsFor pkgs.stdenv.hostPlatform.system;
 in
 {
   imports = [
