@@ -49,7 +49,7 @@ in
 
           home-manager-switch.body = ''
             if test -n "$HOME_MANAGER_FLAKE_REF_ATTR"
-              home-manager switch -v --flake $HOME_MANAGER_FLAKE_REF_ATTR
+              home-manager switch -v --flake $HOME_MANAGER_FLAKE_REF_ATTR $argv
               set -e __HM_SESS_VARS_SOURCED
               bash-env $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
             else
@@ -61,6 +61,8 @@ in
         shellAbbrs = {
           # just playing around with merging this and the Babashka one
           ll = "ls -lh";
+
+          home-manager-switch-with-local-tesujimath-modules = "home-manager-switch --override-input tesujimath-modules path:../home.modules.nix";
         };
 
         plugins = [
