@@ -24,6 +24,8 @@ let
 
       fennel = [ fennel-ls fnlfmt ];
 
+      fish = [ fish-lsp ];
+
       fsharp = [ fsautocomplete fantomas dotnet-sdk_10 ]; # SDK for interactive and REPL
 
       go = [ go gopls ];
