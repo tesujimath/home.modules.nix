@@ -8,8 +8,6 @@ in
 {
   options.tesujimath.fish = {
     enable = mkEnableOption "fish";
-
-    functions = mkOption { type = types.attrsOf (types.attrsOf types.str); default = { }; description = "Fish functions as per Home Manager"; };
   };
 
   config = mkIf cfg.enable {
@@ -38,7 +36,7 @@ in
           dotnet completions script fish | source
         '' else "");
 
-        functions = cfg.functions // {
+        functions = {
           fish_prompt.body = "string join '' -- (set_color green) (string replace -r '\\..*$' '' $hostname) '> ' (set_color normal)";
 
           # work-around for
