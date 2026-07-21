@@ -56,13 +56,10 @@ in
               echo >&2 error: missing environment variable HOME_MANAGER_FLAKE_REF_ATTR
             end
           '';
-        };
 
-        shellAbbrs = {
-          # just playing around with merging this and the Babashka one
-          ll = "ls -lh";
-
-          home-manager-switch-with-local-tesujimath-modules = "home-manager-switch --override-input tesujimath-modules path:../home.modules.nix";
+          home-manager-switch-with-local-tesujimath-modules.body = ''
+            home-manager-switch --override-input tesujimath-modules (string replace -r '/home\.nix.*' /home.modules.nix $HOME_MANAGER_FLAKE_REF_ATTR)
+          '';
         };
 
         plugins = [
