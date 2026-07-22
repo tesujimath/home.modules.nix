@@ -3,6 +3,12 @@
 let
   cfg = config.tesujimath.mitmproxy;
   inherit (lib) mkEnableOption mkIf;
+
+  mitm-view = with pkgs; writeShellApplication {
+    name = "mitm-view";
+    runtimeInputs = [ jnv jq less ];
+    text = builtins.readFile ./mitm-view;
+  };
 in
 {
   options.tesujimath.mitmproxy = {
@@ -19,6 +25,7 @@ in
         with pkgs;
         [
           python3Packages.mitmproxy
+          mitm-view
         ];
     };
   };

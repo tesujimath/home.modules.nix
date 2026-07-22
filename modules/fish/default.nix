@@ -58,7 +58,25 @@ in
           home-manager-switch-with-local-tesujimath-modules.body = ''
             home-manager-switch --override-input tesujimath-modules (string replace -r '/home\.nix.*' /home.modules.nix $HOME_MANAGER_FLAKE_REF_ATTR)
           '';
-        };
+        } // (if config.tesujimath.mitmproxy.enable then {
+          # additional fish functions if mitmproxy is enabled
+          mitmproxy = {
+            body = ''
+              PAGER=mitm-view command mitmproxy $argv
+            '';
+            wraps = "mitmproxy";
+          };
+
+          with-mitmproxy.body = ''
+            HTTPS_PROXY=https://localhost:8080 HTTPS_PROXY=https://localhost:8080 NODE_EXTRA_CA_CERTS=$HOME/.mitmproxy/mitmproxy-ca-cert.pem $argv
+          '';
+        } else { });
+
+        completions = { } // (if config.tesujimath.mitmproxy.enable then {
+          with-mitmproxy.body = ''
+            complete -c with-mitmproxy -xa '(__fish_complete_subcommand)'
+          '';
+        } else { });
 
         plugins = [
           {

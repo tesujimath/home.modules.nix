@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Content-sensitive external viewer for mitmproxy's `v` key.
+# jnv for JSON, `less` for everything else.
+
+file=$1
+if [ -s "$file" ] && jq empty "$file" >/dev/null 2>&1; then
+    exec jnv "$file"
+else
+    exec less "$file"
+fi
