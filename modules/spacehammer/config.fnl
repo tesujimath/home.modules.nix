@@ -236,30 +236,30 @@
 
 (local app-bindings
        [return
-        {:key :c
-         :title "Claude"
-         :action (activator "Claude")}
-         {:key :e
+        {:key :f
+         :title "Finder"
+        :action (activator "Finder")}
+        {:key :p
+         :title "Preview"
+         :action (activator "Preview")}
+        {:key :w
+         :title "WezTerm"
+         :action (activator "WezTerm")}
+        {:key :e
          :title "Emacs"
          :action (activator "Emacs")}
         {:key :s
          :title "Safari"
          :action (activator "Safari")}
-        {:key :f
-         :title "Firefox"
-         :action (activator "Firefox")}
-        {:key :w
-         :title "WezTerm"
-         :action (activator "WezTerm")}
         {:key :m
          :title "Proton Mail"
          :action (activator "Proton Mail")}
         {:key :k
          :title "Kindle"
          :action (activator "Kindle")}
-        {:key :p
-         :title "Preview"
-         :action (activator "Preview")}
+        {:key :c
+         :title "Claude"
+         :action (activator "Claude")}
         {:key :u
          :title music-app
          :action (activator music-app)}])
