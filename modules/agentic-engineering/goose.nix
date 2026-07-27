@@ -62,7 +62,6 @@ in
 
         sessionVariables = {
           GOOSE_PROVIDER = "oMLX";
-          GOOSE_MODEL = "Ornith-1.0-9B-4bit";
         };
       };
   };
