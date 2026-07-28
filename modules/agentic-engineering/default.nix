@@ -16,6 +16,7 @@ in
 
     home = {
       packages = with pkgs; [
+        beads
         cursor-cli
         opencode
         qwen-code
