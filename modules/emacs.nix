@@ -33,7 +33,9 @@ in
         };
 
         home.packages = with pkgs; [
-          enchant # modern spell check abstraction layer, on macOS uses system dictionary
+          # Modern spell check abstraction layer, on macOS uses system dictionary.
+          # Alas on my Datacom Mac Nuspell is crashing if permission problem on any directory, so disable it:
+          (enchant.override { withNuspell = false; })
 
           # previewers for dirvish:
           _7zz # various archive formats
