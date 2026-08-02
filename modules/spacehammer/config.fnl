@@ -326,19 +326,19 @@
          :items emacs-bindings}])
 
 (local common-keys
-       [{:mods [:cmd :ctrl :alt :shift]
+       [{:mods [:cmd :ctrl :alt]
          :key :space
          :action "lib.modal:activate-modal"}
-        {:mods [:cmd :ctrl :alt :shift]
+        {:mods [:cmd :ctrl :alt]
          :key :n
          :action "apps:next-app"}
-        {:mods [:cmd :ctrl :alt :shift]
+        {:mods [:cmd :ctrl :alt]
          :key :p
          :action "apps:prev-app"}
-        {:mods [:cmd :ctrl :alt :shift]
+        {:mods [:cmd :ctrl :alt]
          :key "`"
          :action hs.toggleConsole}
-        {:mods [:cmd :ctrl :alt :shift]
+        {:mods [:cmd :ctrl :alt]
          :key :o
          :action "emacs:edit-with-emacs"}])
 
