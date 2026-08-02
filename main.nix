@@ -7,6 +7,7 @@ let
 in
 {
   imports = [
+    ./modules/aerospace
     ./modules/agentic-engineering
     ./modules/babashka.nix
     ./modules/bash.nix
