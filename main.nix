@@ -20,6 +20,7 @@ in
     ./modules/homebrew.nix
     ./modules/languages
     ./modules/mitmproxy
+    ./modules/notion
     ./modules/syncthing.nix
     ./modules/tmux.nix
     ./modules/web-browser.nix
