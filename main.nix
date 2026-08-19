@@ -23,6 +23,7 @@ in
     ./modules/notion
     ./modules/syncthing.nix
     ./modules/tmux.nix
+    ./modules/vmware-fusion-support.nix
     ./modules/web-browser.nix
     ./modules/wezterm
     ./modules/xdg.nix
