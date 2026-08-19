@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering.claude;
+  cfg = config.tesujimath.agentic-engineering;
   inherit (lib) mkOption mkIf;
   inherit (pkgs) fetchFromGitHub;
 
@@ -63,7 +63,7 @@ let
     skills;
 
   claudeSkills =
-    if config.tesujimath.agentic-engineering.claude.enable then
+    if cfg.claude.enable then
       (lib.concatMapAttrs
         (_: skill:
           lib.attrsets.mapAttrs'
@@ -85,7 +85,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.skills.enable {
     home =
       {
         file = agentsSkills // claudeSkills;

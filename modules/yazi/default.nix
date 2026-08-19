@@ -12,7 +12,7 @@ in
     programs = {
       yazi = {
         enable = true;
-        enableBashIntegration = config.tesujimath.bash.enable;
+        enableBashIntegration = true;
         shellWrapperName = "y";
         settings = {
           mgr = {

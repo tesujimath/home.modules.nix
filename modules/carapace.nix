@@ -15,6 +15,13 @@ in
         enable = true;
         enableBashIntegration = true;
       };
+
+      # ignored unless fish enabled
+      fish.interactiveShellInit = ''
+
+          # carapace integration
+          carapace _carapace | source
+      '';
     };
   };
 }

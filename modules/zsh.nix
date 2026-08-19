@@ -13,14 +13,6 @@ in
     programs.zsh = {
       enable = true;
 
-      envExtra = ''
-        ${if config.tesujimath.homebrew.enable then ''
-
-          # homebrew integration
-          eval "$(/opt/homebrew/bin/brew shellenv)"
-        '' else ""}
-      '';
-
       initContent = ''
         home-manager-switch() {
           if test -n "$HOME_MANAGER_FLAKE_REF_ATTR"; then

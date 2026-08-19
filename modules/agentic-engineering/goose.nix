@@ -14,23 +14,15 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile =
-      let
-        completions =
-          if config.tesujimath.fish.enable then {
-            "fish/completions/goose.fish".source =
-              pkgs.runCommand "goose-fish-completion" { } ''
-                ${pkgs.goose-cli}/bin/goose completion fish > $out
-              '';
-          } else { };
-      in
-      completions;
+    home.packages = with pkgs; [
+      goose-cli
+    ];
 
-    home =
-      {
-        packages = with pkgs; [
-          goose-cli
-        ];
-      };
+    # ignored unless fish enabled
+    programs.fish.completions = {
+      goose.body = builtins.readFile (pkgs.runCommand "goose-fish-completion" { } ''
+        ${pkgs.goose-cli}/bin/goose completion fish > $out
+      '');
+    };
   };
 }

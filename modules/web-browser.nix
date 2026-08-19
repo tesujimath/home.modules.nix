@@ -35,7 +35,7 @@ in
       })
     (mkIf (cfg.enable && !stdenv.isDarwin) {
       home.packages =
-        if config.tesujimath.web-browser.wsl.use-native-windows then [ ] else
+        if cfg.wsl.use-native-windows then [ ] else
           with pkgs;
           [
             brave
@@ -45,11 +45,11 @@ in
           ];
 
       xdg.desktopEntries =
-        if config.tesujimath.web-browser.wsl.use-native-windows then {
+        if cfg.wsl.use-native-windows then {
           firefox = {
             name = "Firefox";
             genericName = "Web Browser";
-            exec = config.tesujimath.web-browser.wsl.firefox.exec;
+            exec = cfg.wsl.firefox.exec;
             terminal = false;
             categories = [ "Application" "Network" "WebBrowser" ];
             mimeType = [ "text/html" "text/xml" ];
@@ -57,7 +57,7 @@ in
           google-chrome = {
             name = "Google Chrome";
             genericName = "Web Browser";
-            exec = config.tesujimath.web-browser.wsl.google-chrome.exec;
+            exec = cfg.wsl.google-chrome.exec;
             terminal = false;
             categories = [ "Application" "Network" "WebBrowser" ];
             mimeType = [ "text/html" "text/xml" ];

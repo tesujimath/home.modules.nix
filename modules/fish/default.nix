@@ -22,19 +22,7 @@ in
         interactiveShellInit = ''
           # disable Fish greeting message
           set -g fish_greeting
-        '' + (if config.tesujimath.carapace.enable then ''
-
-          # carapace integration
-          carapace _carapace | source
-        '' else "") + (if config.tesujimath.homebrew.enable then ''
-
-          # homebrew integration
-          eval "$(/opt/homebrew/bin/brew shellenv)"
-        '' else "") + (if (config.tesujimath.languages.csharp.enable || config.tesujimath.languages.fsharp.enable) then ''
-
-          # dotnet completions
-          dotnet completions script fish | source
-        '' else "");
+        '';
 
         functions = {
           fish_prompt.body = "string join '' -- (set_color green) (string replace -r '\\..*$' '' $hostname) '> ' (set_color normal)";
@@ -58,25 +46,7 @@ in
           home-manager-switch-with-local-tesujimath-modules.body = ''
             home-manager-switch --override-input tesujimath-modules (string replace -r '/home\.nix.*' /home.modules.nix $HOME_MANAGER_FLAKE_REF_ATTR)
           '';
-        } // (if config.tesujimath.mitmproxy.enable then {
-          # additional fish functions if mitmproxy is enabled
-          mitmproxy = {
-            body = ''
-              PAGER=mitm-view command mitmproxy $argv
-            '';
-            wraps = "mitmproxy";
-          };
-
-          with-mitmproxy.body = ''
-            HTTPS_PROXY=https://localhost:8080 HTTPS_PROXY=https://localhost:8080 NODE_EXTRA_CA_CERTS=$HOME/.mitmproxy/mitmproxy-ca-cert.pem $argv
-          '';
-        } else { });
-
-        completions = { } // (if config.tesujimath.mitmproxy.enable then {
-          with-mitmproxy.body = ''
-            complete -c with-mitmproxy -xa '(__fish_complete_subcommand)'
-          '';
-        } else { });
+        };
 
         plugins = [
           {

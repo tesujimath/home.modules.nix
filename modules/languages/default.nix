@@ -81,17 +81,27 @@ in
     (name: packages: if cfg.${name}.enable then packages else [ ])
     language-packages));
 
-  config.home = {
-    packages =
-      let
-        language-support = symlinkJoin
-          {
-            name = "language-support";
-            paths = config.tesujimath.languages.packages;
-          };
-      in
-      [
-        language-support
-      ];
+  config = {
+    home = {
+      packages =
+        let
+          language-support = symlinkJoin
+            {
+              name = "language-support";
+              paths = config.tesujimath.languages.packages;
+            };
+        in
+        [
+          language-support
+        ];
+    };
+
+    # ignored unless fish enabled
+    programs.fish.interactiveShellInit =
+      (if (cfg.csharp.enable || cfg.fsharp.enable) then ''
+
+          # dotnet completions
+          dotnet completions script fish | source
+'' else "");
   };
 }
