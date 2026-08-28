@@ -25,6 +25,7 @@ in
   };
 
   imports = [
+    ./agent-shell-support.nix
     ./claude.nix
     ./goose.nix
     ./skills.nix
