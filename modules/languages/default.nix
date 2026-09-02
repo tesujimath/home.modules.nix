@@ -5,6 +5,9 @@ let
   inherit (lib) mkIf mkOption;
   inherit (pkgs) symlinkJoin;
 
+  # nixpkgs' bicep-lsp is pinned to 0.34.44; this shadows it with a current build
+  bicep-lsp = pkgs.callPackage ./bicep-lsp.nix { };
+
   prettier-with-plugins = pkgs.callPackage ./prettier-with-plugins.nix { };
 
   language-packages =
@@ -15,6 +18,8 @@ let
       bash = [ bash-language-server shfmt ];
 
       beancount = [ beancount-language-server ];
+
+      bicep = [ bicep-lsp ];
 
       c = [ clang-tools ];
 
