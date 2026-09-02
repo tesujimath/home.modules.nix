@@ -1,3 +1,4 @@
+{ flakePkgs }:
 { config, lib, pkgs, ... }:
 
 let
@@ -16,10 +17,9 @@ in
 
     home = {
       packages = with pkgs; [
-        beads
         cursor-cli
-        opencode
-        qwen-code
+        # beads
+        # opencode
       ];
     };
   };
@@ -29,5 +29,6 @@ in
     ./claude.nix
     ./goose.nix
     ./skills.nix
+    (import ./oh-my-pi.nix { inherit flakePkgs; })
   ];
 }

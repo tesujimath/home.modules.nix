@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    ./modules/agentic-engineering
+    (import ./modules/agentic-engineering { inherit flakePkgs; })
     ./modules/babashka.nix
     ./modules/bash.nix
     ./modules/carapace.nix

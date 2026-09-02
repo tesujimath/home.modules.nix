@@ -15,16 +15,22 @@
       url = "github:tesujimath/bash-env-json/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    oh-my-pi = {
+      url = "github:can1357/oh-my-pi/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
     let
-      inherit (inputs) bash-env-json nixpkgs home-manager systems;
+      inherit (inputs) nixpkgs home-manager systems bash-env-json oh-my-pi;
 
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       flakePkgsFor = system: {
         bash-env-json = bash-env-json.packages.${system}.default;
+        oh-my-pi = oh-my-pi.packages.${system}.default;
       };
 
       docsFor = system:
