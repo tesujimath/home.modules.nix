@@ -9,7 +9,7 @@ in
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable Goose agent CLI";
-      default = true;
+      default = false;
     };
   };
 

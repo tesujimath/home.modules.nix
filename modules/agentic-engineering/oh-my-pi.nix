@@ -10,7 +10,7 @@ in
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable Oh-My-Pi agent harness";
-      default = true;
+      default = false;
     };
   };
 

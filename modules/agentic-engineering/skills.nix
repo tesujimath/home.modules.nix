@@ -81,7 +81,7 @@ in
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable agents skills";
-      default = true;
+      default = false;
     };
   };
 
