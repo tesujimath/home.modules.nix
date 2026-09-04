@@ -45,8 +45,6 @@ let
 
       nix = [ nil nixpkgs-fmt ];
 
-      python = [ pyright ruff ];
-
       rust = [ rust-analyzer rustfmt ];
 
       terraform = [ terraform-ls ];
@@ -61,10 +59,24 @@ let
 
       yaml = [ yaml-language-server ];
     };
+
+  # needed for multiple LSPs for eglot
+  rassumfrassum_034 = pkgs.rassumfrassum.overrideAttrs (attrs: rec {
+    version = "0.3.4";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "joaotavora";
+      repo = "rassumfrassum";
+      tag = "v${version}";
+      hash = "sha256-q8Pv+E+UejK3z5xCw44Gji2xJ01uIo18qS5LHpLc5HE=";
+    };
+  });
+
 in
 {
   imports = [
     ./clojure
+    ./python
     ./typescript
   ];
 
@@ -84,7 +96,11 @@ in
 
   config.tesujimath.languages.packages = (lib.concatLists (lib.mapAttrsToList
     (name: packages: if cfg.${name}.enable then packages else [ ])
-    language-packages));
+    language-packages))
+  ++ (if config.tesujimath.emacs.enable then [
+    # needed for multiple LSPs in eglot
+    rassumfrassum_034
+  ] else [ ]);
 
   config = {
     home = {

@@ -82,7 +82,7 @@ in
               }
               {
                 name = "python";
-                language-servers = [ "pyright" ];
+                language-servers = [ "pyright" "ruff" ];
                 formatter = {
                   command = "ruff";
                   args = [
