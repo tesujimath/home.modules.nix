@@ -15,12 +15,7 @@ in
           biome
           deno
           typescript-language-server
-        ] ++ (if config.tesujimath.zed-editor.enable then [
-          eslint
-          tailwindcss-language-server
-          typescript
-          vtsls
-        ] else [ ]);
+        ];
 
       home.file = {
         ".config/rassumfrassum/deno-biome.py".text = ''

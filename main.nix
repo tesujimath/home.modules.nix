@@ -30,7 +30,6 @@ in
     ./modules/xmonad-desktop
     ./modules/yazi
     ./modules/zathura.nix
-    ./modules/zed-editor.nix
     ./modules/zsh.nix
   ];
 
