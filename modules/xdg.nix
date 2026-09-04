@@ -6,7 +6,7 @@ let
 in
 {
   # this module is on for Linux, as many things depend on it
-  config = mkIf pkgs.stdenv.isLinux {
+  config = mkIf pkgs.stdenv.hostPlatform.isLinux {
     home.packages =
       [
         xdg-utils

@@ -92,8 +92,8 @@ in
           in
           builtins.concatStringsSep "\n\n" [
             commonConfig
-            (if stdenv.isLinux then linuxConfig else "")
-            (if stdenv.isDarwin then darwinConfig else "")
+            (if stdenv.hostPlatform.isLinux then linuxConfig else "")
+            (if stdenv.hostPlatform.isDarwin then darwinConfig else "")
           ];
       };
     };

@@ -16,9 +16,9 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs;
       # https://github.com/xenodium/agent-shell#optional-image-utilities
-      lib.optionals stdenv.isDarwin [
+      lib.optionals stdenv.hostPlatform.isDarwin [
         pngpaste
-      ] ++ lib.optionals stdenv.isLinux [
+      ] ++ lib.optionals stdenv.hostPlatform.isLinux [
         imagemagick_light
         wl-clipboard
       ];

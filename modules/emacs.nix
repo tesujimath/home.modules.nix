@@ -44,7 +44,7 @@ in
           vips # images
         ];
       })
-    (mkIf (cfg.enable && !stdenv.isDarwin)
+    (mkIf (cfg.enable && !stdenv.hostPlatform.isDarwin)
       {
         # no XDG on macOS
         xdg.desktopEntries = {

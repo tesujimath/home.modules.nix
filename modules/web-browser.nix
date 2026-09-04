@@ -29,11 +29,11 @@ in
   };
 
   config = mkMerge [
-    (mkIf (cfg.enable && stdenv.isDarwin)
+    (mkIf (cfg.enable && stdenv.hostPlatform.isDarwin)
       {
         programs.firefox.enable = true;
       })
-    (mkIf (cfg.enable && !stdenv.isDarwin) {
+    (mkIf (cfg.enable && !stdenv.hostPlatform.isDarwin) {
       home.packages =
         if cfg.wsl.use-native-windows then [ ] else
           with pkgs;

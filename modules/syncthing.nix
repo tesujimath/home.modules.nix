@@ -12,7 +12,7 @@ in
   config = mkIf cfg.enable {
     services.syncthing = {
       enable = true;
-      tray.enable = pkgs.stdenv.isLinux;
+      tray.enable = pkgs.stdenv.hostPlatform.isLinux;
     };
   };
 }
