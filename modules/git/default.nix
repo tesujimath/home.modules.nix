@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.tesujimath.git;
@@ -28,6 +28,19 @@ in
           alias = {
             glog = "log --graph --all --pretty='format:%C(auto)%h %D %<|(100)%s %<|(120)%an %ar'";
           };
+        };
+      };
+
+      gh = {
+        enable = true;
+
+        extensions = with pkgs; [
+          gh-stack
+        ];
+
+        settings.aliases = {
+          # preserve defaults that otherwise would be clobbered by Nix:
+          co = "pr checkout";
         };
       };
     };
