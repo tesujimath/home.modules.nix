@@ -39,6 +39,19 @@ let
       };
     };
 
+    gh-stack = {
+      # v0.1.1 - the skill was rewritten here, much leaner than v0.1.0's
+      src = fetchFromGitHub {
+        owner = "github";
+        repo = "gh-stack";
+        rev = "2bd699a544a09cb5c45a013d03416e0894b0454e";
+        sha256 = "sha256-jwfqiCnCOOW0AKA52hbgvCCoLzfFX+QfM+vXABkzZgw=";
+      };
+      path = {
+        gh-stack = "skills/gh-stack";
+      };
+    };
+
     andrej-karpathy = {
       src = fetchFromGitHub {
         owner = "multica-ai";
