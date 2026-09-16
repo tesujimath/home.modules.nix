@@ -8,6 +8,7 @@ in
 {
   imports = [
     (import ./modules/agentic-engineering { inherit flakePkgs; })
+    ./modules/azure-cli.nix
     ./modules/babashka.nix
     ./modules/bash.nix
     ./modules/carapace.nix
