@@ -2,12 +2,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering;
+  cfg = config.tesujimath.agents;
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.tesujimath.agentic-engineering = {
-    enable = mkEnableOption "agentic-engineering";
+  options.tesujimath.agents = {
+    enable = mkEnableOption "agents";
   };
 
   config = mkIf cfg.enable {
@@ -27,6 +27,7 @@ in
   imports = [
     ./agent-shell-support.nix
     ./claude.nix
+    ./deprecated.nix
     ./goose.nix
     ./skills.nix
     (import ./oh-my-pi.nix { inherit flakePkgs; })

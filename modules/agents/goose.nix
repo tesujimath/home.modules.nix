@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering.goose;
+  cfg = config.tesujimath.agents.goose;
   inherit (lib) mkOption mkIf;
 in
 {
-  options.tesujimath.agentic-engineering.goose = {
+  options.tesujimath.agents.goose = {
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable Goose agent CLI";

@@ -2,11 +2,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering.oh-my-pi;
+  cfg = config.tesujimath.agents.oh-my-pi;
   inherit (lib) mkOption mkIf;
 in
 {
-  options.tesujimath.agentic-engineering.oh-my-pi = {
+  options.tesujimath.agents.oh-my-pi = {
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable Oh-My-Pi agent harness";

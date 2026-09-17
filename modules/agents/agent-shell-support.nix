@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering.agent-shell-support;
+  cfg = config.tesujimath.agents.agent-shell-support;
   inherit (lib) mkOption mkIf;
 in
 {
-  options.tesujimath.agentic-engineering.agent-shell-support = {
+  options.tesujimath.agents.agent-shell-support = {
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable support for Emacs agent-shell";

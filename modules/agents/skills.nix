@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering;
+  cfg = config.tesujimath.agents;
   inherit (lib) mkOption mkIf;
   inherit (pkgs) fetchFromGitHub;
 
@@ -90,7 +90,7 @@ let
 
 in
 {
-  options.tesujimath.agentic-engineering.skills = {
+  options.tesujimath.agents.skills = {
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable agents skills";

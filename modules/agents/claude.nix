@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agentic-engineering.claude;
+  cfg = config.tesujimath.agents.claude;
   inherit (lib) mkOption mkIf;
 in
 {
-  options.tesujimath.agentic-engineering.claude = {
+  options.tesujimath.agents.claude = {
     enable = mkOption {
       type = lib.types.bool;
       description = "Enable Claude Code and ACP";
