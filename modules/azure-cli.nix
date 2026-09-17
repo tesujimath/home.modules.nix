@@ -38,5 +38,36 @@ in
       [
         azure-cli-with-extensions
       ];
+
+    programs = {
+      # ignored unless fish is enabled
+      fish.functions = {
+        ado-token =
+          {
+            description = "Mint an Azure DevOps access token into $TOKEN";
+            body = ''
+              # 499b84ac-1321-427f-aa17-267ca6975798 is the fixed first-party ADO resource ID
+              set -l json (az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 -o json)
+              or return 1
+              set -gx TOKEN (echo $json | jq -r .accessToken)
+              echo "TOKEN set, expires "(echo $json | jq -r .expiresOn)
+            '';
+          };
+        ado =
+          {
+            description = "GET an Azure DevOps REST URL as JSON";
+            body = ''
+              set -l out (curl -sS -w '\n%{http_code}' -H "Authorization: Bearer $TOKEN" -H "Accept: application/json" $argv)
+              set -l code $out[-1]
+              if contains -- $code 301 302 401 403
+                  echo "ado: not authenticated or not authorized (HTTP $code) - run ado-token" >&2
+                  return 1
+              end
+              printf '%s\n' $out[1..-2]
+            '';
+          };
+      };
+
+    };
   };
 }
