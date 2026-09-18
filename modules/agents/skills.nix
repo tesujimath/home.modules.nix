@@ -186,6 +186,16 @@ in
             };
           };
 
+          notion = {
+            owner = mkDefault "makenotion";
+            repo = mkDefault "skills";
+            rev = mkDefault "423af2bf546cd0354e5cc871017251945d9ad14f";
+            hash = mkDefault "sha256-rzT+jXI+hwoXvqS/ln6PT2juxzFsDoKGIOygkJWCM94=";
+            skills = mkDefault {
+              notion-cli = "skills/notion-cli";
+            };
+          };
+
           andrej-karpathy = {
             owner = mkDefault "multica-ai";
             repo = mkDefault "andrej-karpathy-skills";
