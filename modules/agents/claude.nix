@@ -14,6 +14,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    tesujimath.agents.skills.targets = [ ".claude/skills" ];
+
     home =
       {
         packages = with pkgs; [
