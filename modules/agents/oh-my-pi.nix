@@ -3,19 +3,15 @@
 
 let
   cfg = config.tesujimath.agents.oh-my-pi;
-  inherit (lib) mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.tesujimath.agents.oh-my-pi = {
-    enable = mkOption {
-      type = lib.types.bool;
-      description = "Enable Oh-My-Pi agent harness";
-      default = false;
-    };
+    enable = mkEnableOption "Oh-My-Pi agent harness";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = [
       flakePkgs.oh-my-pi
     ];
   };

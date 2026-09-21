@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.tesujimath.agents;
+  cfg = config.tesujimath.agents.skills;
   inherit (lib) mkOption mkIf mkDefault types;
   inherit (pkgs) fetchFromGitHub;
 
@@ -68,7 +68,7 @@ let
     }));
   };
 
-  enabledSources = lib.filterAttrs (_: source: source.enable) cfg.skills.sources;
+  enabledSources = lib.filterAttrs (_: source: source.enable) cfg.sources;
 
   # flattened across all enabled sources, one element per skill to install
   selected = lib.concatLists (lib.mapAttrsToList
@@ -94,7 +94,7 @@ let
     (target: map
       (skill: lib.nameValuePair "${target}/${skill.skillName}" { inherit (skill) source; })
       selected)
-    (lib.unique cfg.skills.targets));
+    (lib.unique cfg.targets));
 
 in
 {
@@ -147,18 +147,21 @@ in
           mattpocock = {
             owner = mkDefault "mattpocock";
             repo = mkDefault "skills";
-            rev = mkDefault "8370e760d0251a3738e006aeacec6d1cb31dd208";
-            hash = mkDefault "sha256-+Crwt+cP8B6wiIsthpwFUBgRHeTSRoPm2YASZEQE/9k=";
+            rev = mkDefault "release/v1.2";
+            hash = mkDefault "sha256-y16RmXOA3Hkr7HXkzWEDBvd8f3rMXB0XDxOOCjDNApc=";
             skills = mkDefault {
               # productivity
               grill-me = "skills/productivity/grill-me";
               grilling = "skills/productivity/grilling";
               handoff = "skills/productivity/handoff";
               teach = "skills/productivity/teach";
-              writing-great-skills = "skills/productivity/writing-great-skills";
+              to-questionnaire = "skills/productivity/to-questionnaire";
+              wait-what = "skills/productivity/wait-what";
+              writing-for-agents = "skills/productivity/writing-for-agents";
 
               # engineering
               ask-matt = "skills/engineering/ask-matt";
+              code-review = "skills/engineering/code-review";
               codebase-design = "skills/engineering/codebase-design";
               diagnosing-bugs = "skills/engineering/diagnosing-bugs";
               domain-modeling = "skills/engineering/domain-modeling";
@@ -166,12 +169,16 @@ in
               implement = "skills/engineering/implement";
               improve-codebase-architecture = "skills/engineering/improve-codebase-architecture";
               prototype = "skills/engineering/prototype";
+              research = "skills/engineering/research";
               resolving-merge-conflicts = "skills/engineering/resolving-merge-conflicts";
               setup-matt-pocock-skills = "skills/engineering/setup-matt-pocock-skills";
               tdd = "skills/engineering/tdd";
               to-issues = "skills/engineering/to-issues";
               to-prd = "skills/engineering/to-prd";
+              to-spec = "skills/engineering/to-spec";
               triage = "skills/engineering/triage";
+              wayfinder = "skills/engineering/wayfinder";
+              wizard = "skills/engineering/wizard";
             };
           };
 
@@ -209,7 +216,7 @@ in
       };
     }
 
-    (mkIf cfg.skills.enable {
+    (mkIf cfg.enable {
       assertions = [{
         assertion = duplicated == { };
         message = ''

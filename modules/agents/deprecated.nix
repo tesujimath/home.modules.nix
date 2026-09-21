@@ -18,7 +18,6 @@ let
 in
 {
   imports = map renamed [
-    [ "enable" ]
     [ "agent-shell-support" "enable" ]
     [ "claude" "enable" ]
     [ "goose" "enable" ]

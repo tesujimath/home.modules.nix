@@ -2,15 +2,11 @@
 
 let
   cfg = config.tesujimath.agents.claude;
-  inherit (lib) mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.tesujimath.agents.claude = {
-    enable = mkOption {
-      type = lib.types.bool;
-      description = "Enable Claude Code and ACP";
-      default = true;
-    };
+    enable = mkEnableOption "Claude Code and its ACP";
   };
 
   config = mkIf cfg.enable {

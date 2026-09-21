@@ -2,15 +2,11 @@
 
 let
   cfg = config.tesujimath.agents.agent-shell-support;
-  inherit (lib) mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.tesujimath.agents.agent-shell-support = {
-    enable = mkOption {
-      type = lib.types.bool;
-      description = "Enable support for Emacs agent-shell";
-      default = true;
-    };
+    enable = mkEnableOption "Support for Emacs agent-shell";
   };
 
   config = mkIf cfg.enable {

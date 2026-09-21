@@ -2,15 +2,11 @@
 
 let
   cfg = config.tesujimath.agents.goose;
-  inherit (lib) mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.tesujimath.agents.goose = {
-    enable = mkOption {
-      type = lib.types.bool;
-      description = "Enable Goose agent CLI";
-      default = false;
-    };
+    enable = mkEnableOption "Goose agent CLI";
   };
 
   config = mkIf cfg.enable {
