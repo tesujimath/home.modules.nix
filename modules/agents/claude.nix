@@ -19,5 +19,9 @@ in
           claude-agent-acp
         ];
       };
+
+    programs.git.ignores = [
+      "**/.claude/settings.local.json"
+    ];
   };
 }

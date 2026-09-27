@@ -30,6 +30,11 @@ in
             enable = true;
             package = emacsWithPackages;
           };
+
+          git.ignores = [
+            "*~"
+            ".agent-shell/"
+          ];
         };
 
         home.packages = with pkgs; [
