@@ -7,8 +7,19 @@ let
 
   lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister";
 
+  # nuspell throws from search_dirs_for_one_dict if any directory in its search
+  # path is inaccessible, and since Enchant doesn't catch that, it aborts Emacs
+  nuspell = pkgs.nuspell.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [ ./nuspell-search-dirs-no-throw.patch ];
+  });
+
+  enchant = pkgs.enchant.override { inherit nuspell; };
+
   emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).withPackages (epkgs: with epkgs; [
-    jinx # spellcheck support
+    # spellcheck support, linked against our patched Enchant
+    (jinx.overrideAttrs (old: {
+      buildInputs = (lib.remove pkgs.enchant_2 old.buildInputs) ++ [ enchant ];
+    }))
     pdf-tools # for PDF preview in dirvish
     vterm # terminal emulator
   ]);

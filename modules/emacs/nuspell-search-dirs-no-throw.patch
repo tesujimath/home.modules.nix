@@ -1,0 +1,22 @@
+--- a/src/nuspell/finder.cxx
++++ b/src/nuspell/finder.cxx
+@@ -266,13 +266,17 @@
+ {
+ 	using std::filesystem::is_regular_file;
+ 	auto fp = fs_path();
++	// Use the non-throwing overload, so that an inaccessible directory in
++	// the search path (e.g. EACCES) is skipped rather than throwing an
++	// exception across the C API of callers such as Enchant.
++	auto ec = std::error_code();
+ 	for (auto& dir : dir_paths) {
+ 		fp = dir;
+ 		fp /= dict_name_stem;
+ 		fp += ".dic";
+-		if (is_regular_file(fp)) {
++		if (is_regular_file(fp, ec)) {
+ 			fp.replace_extension(".aff");
+-			if (is_regular_file(fp))
++			if (is_regular_file(fp, ec))
+ 				return fp;
+ 		}
+ 	}
