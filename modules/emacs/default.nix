@@ -7,19 +7,8 @@ let
 
   lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister";
 
-  # nuspell throws from search_dirs_for_one_dict if any directory in its search
-  # path is inaccessible, and since Enchant doesn't catch that, it aborts Emacs
-  nuspell = pkgs.nuspell.overrideAttrs (old: {
-    patches = (old.patches or [ ]) ++ [ ./nuspell-search-dirs-no-throw.patch ];
-  });
-
-  enchant = pkgs.enchant.override { inherit nuspell; };
-
   emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs).withPackages (epkgs: with epkgs; [
-    # spellcheck support, linked against our patched Enchant
-    (jinx.overrideAttrs (old: {
-      buildInputs = (lib.remove pkgs.enchant_2 old.buildInputs) ++ [ enchant ];
-    }))
+    jinx # spellcheck support
     pdf-tools # for PDF preview in dirvish
     vterm # terminal emulator
   ]);
@@ -36,6 +25,12 @@ in
     (mkIf cfg.enable
       {
         # all platforms
+        warnings = lib.optional (!(pkgs.nuspell.tesujimathSearchDirsNoThrow or false)) ''
+          tesujimath.emacs: nuspell is unpatched, so jinx may crash Emacs if a
+          dictionary search directory is unreadable.  Add
+          tesujimath-modules.overlays.default to your nixpkgs overlays.
+        '';
+
         programs = {
           emacs = {
             enable = true;

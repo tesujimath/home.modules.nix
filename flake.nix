@@ -33,9 +33,14 @@
         oh-my-pi = oh-my-pi.packages.${system}.default;
       };
 
+      overlays = import ./overlays { inherit (nixpkgs) lib; };
+
       docsFor = system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ overlays.default ];
+          };
 
           hmEval = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
@@ -58,6 +63,9 @@
 
     in
     {
+      # the home manager modules expect these to be applied to their pkgs
+      inherit overlays;
+
       homeManagerModules.default =
         {
           imports = [
