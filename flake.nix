@@ -20,17 +20,23 @@
       url = "github:can1357/oh-my-pi/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    crit = {
+      url = "github:tomasz-tomczyk/crit/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
     let
-      inherit (inputs) nixpkgs home-manager systems bash-env-json oh-my-pi;
+      inherit (inputs) nixpkgs home-manager systems bash-env-json oh-my-pi crit;
 
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       flakePkgsFor = system: {
         bash-env-json = bash-env-json.packages.${system}.default;
         oh-my-pi = oh-my-pi.packages.${system}.default;
+        crit = crit.packages.${system}.default;
       };
 
       overlays = import ./overlays { inherit (nixpkgs) lib; };

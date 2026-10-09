@@ -5,6 +5,7 @@
   imports = [
     ./agent-shell-support.nix
     ./claude.nix
+    (import ./crit.nix { inherit flakePkgs; })
     ./cursor.nix
     ./deprecated.nix
     ./goose.nix
