@@ -6,14 +6,10 @@ let
 in
 {
   options.tesujimath.agents.cursor = {
-    enable = mkEnableOption "Cursor and its ACP";
+    enable = mkEnableOption "Cursor CLI";
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      cursor.enable = true;
-    };
-
     home = {
       packages = with pkgs; [
         cursor-cli
