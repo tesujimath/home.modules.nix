@@ -69,6 +69,27 @@
         "type": "github"
       }
     },
+    "crit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792180726,
+        "narHash": "sha256-pI7Xj9MZo9a+SbxXVY64GwW5jn5x1+hBthyzbfUj14w=",
+        "owner": "tomasz-tomczyk",
+        "repo": "crit",
+        "rev": "a732b9ac061b284ab03eb1be31d7a11ed0c36c38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tomasz-tomczyk",
+        "ref": "main",
+        "repo": "crit",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -215,6 +236,7 @@
     "root": {
       "inputs": {
         "bash-env-json": "bash-env-json",
+        "crit": "crit",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "oh-my-pi": "oh-my-pi",
