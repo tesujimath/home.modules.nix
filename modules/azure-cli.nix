@@ -13,7 +13,7 @@ in
       default = with pkgs.azure-cli-extensions;
         let
           my = {
-            # latest version required to list pipelines 🤷
+            # currently unused, kept for reference of how to override
             azure-devops = azure-devops.overridePythonAttrs (_: rec {
               version = "1.0.8";
               src = pkgs.fetchurl {
@@ -24,7 +24,8 @@ in
           };
         in
         [
-          my.azure-devops
+          azure-devops # official one caught up
+          application-insights
           log-analytics
         ];
     };
