@@ -22,6 +22,7 @@ in
     ./modules/languages
     ./modules/mitmproxy
     ./modules/notion
+    ./modules/sql.nix
     ./modules/syncthing.nix
     ./modules/tmux.nix
     ./modules/vmware-fusion-support.nix
