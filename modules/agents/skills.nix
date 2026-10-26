@@ -147,8 +147,8 @@ in
           mattpocock = {
             owner = mkDefault "mattpocock";
             repo = mkDefault "skills";
-            rev = mkDefault "release/v1.2";
-            hash = mkDefault "sha256-y16RmXOA3Hkr7HXkzWEDBvd8f3rMXB0XDxOOCjDNApc=";
+            rev = mkDefault "v1.3.1";
+            hash = mkDefault "sha256-/mAmj7QFdyOWhLmy3Rt2/Hfsh5qwirTRax7hmQffFdo";
             skills = mkDefault {
               # productivity
               grill-me = "skills/productivity/grill-me";
@@ -167,15 +167,16 @@ in
               domain-modeling = "skills/engineering/domain-modeling";
               grill-with-docs = "skills/engineering/grill-with-docs";
               implement = "skills/engineering/implement";
+              implement-spec = "skills/engineering/implement-spec";
               improve-codebase-architecture = "skills/engineering/improve-codebase-architecture";
+              pr = "skills/engineering/pr";
               prototype = "skills/engineering/prototype";
               research = "skills/engineering/research";
-              resolving-merge-conflicts = "skills/engineering/resolving-merge-conflicts";
+              retro = "skills/engineering/retro";
               setup-matt-pocock-skills = "skills/engineering/setup-matt-pocock-skills";
               tdd = "skills/engineering/tdd";
-              to-issues = "skills/engineering/to-issues";
-              to-prd = "skills/engineering/to-prd";
               to-spec = "skills/engineering/to-spec";
+              to-tickets = "skills/engineering/to-tickets";
               triage = "skills/engineering/triage";
               wayfinder = "skills/engineering/wayfinder";
               wizard = "skills/engineering/wizard";
