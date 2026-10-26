@@ -43,17 +43,23 @@ in
           ];
         };
 
-        home.packages = with pkgs; [
-          enchant # modern spell check abstraction layer, on macOS uses system dictionary
+        home = {
+          packages = with pkgs; [
+            enchant # modern spell check abstraction layer, on macOS uses system dictionary
 
-          # previewers for dirvish:
-          _7zz # various archive formats
-          epub-thumbnailer # e-books
-          ffmpegthumbnailer # video
-          mediainfo # audio/video metadata
-          poppler-utils # pdftoppm for PDF preview
-          vips # images
-        ];
+            # previewers for dirvish:
+            _7zz # various archive formats
+            epub-thumbnailer # e-books
+            ffmpegthumbnailer # video
+            mediainfo # audio/video metadata
+            poppler-utils # pdftoppm for PDF preview
+            vips # images
+          ];
+
+          sessionVariables = {
+            ESHELL = config.tesujimath.defaultShellPath;
+          };
+        };
       })
     (mkIf (cfg.enable && stdenv.hostPlatform.isDarwin)
       {
