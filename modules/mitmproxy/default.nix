@@ -19,6 +19,8 @@ in
     home = {
       file = {
         ".mitmproxy/config.yaml".source = ./config.yaml;
+        ".mitmproxy/jsonl.py".source = ./jsonl.py;
+        ".mitmproxy/keys.yaml".source = ./keys.yaml;
       };
 
       packages =

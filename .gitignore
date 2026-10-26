@@ -2,3 +2,4 @@
 /result
 .cache
 /.agent-shell
+__pycache__/

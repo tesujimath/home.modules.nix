@@ -1,0 +1,14 @@
+- key: R
+  ctx: [flowlist, flowview]
+  cmd: jsonl.toggle
+  help: Start (prompting for a label) or stop jsonl recording
+
+- key: N
+  ctx: [flowlist, flowview]
+  cmd: console.command jsonl.note
+  help: Add a note to the current jsonl recording
+
+- key: J
+  ctx: [flowlist]
+  cmd: console.command jsonl.export @marked
+  help: Export marked flows as jsonl

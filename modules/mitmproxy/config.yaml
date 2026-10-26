@@ -1,2 +1,6 @@
 # disable the mouse so we can copy/paste flows
 console_mouse: false
+
+# jsonl recording, see jsonl.py and keys.yaml
+scripts:
+  - ~/.mitmproxy/jsonl.py
