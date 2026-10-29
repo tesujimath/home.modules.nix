@@ -12,6 +12,7 @@ in
     ./modules/babashka.nix
     ./modules/bash.nix
     ./modules/carapace.nix
+    ./modules/docker.nix
     ./modules/emacs
     (import ./modules/fish { inherit flakePkgs; })
     ./modules/fonts.nix
