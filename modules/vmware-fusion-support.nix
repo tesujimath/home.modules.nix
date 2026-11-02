@@ -15,19 +15,19 @@ in
       fish.functions = {
         vmrun = {
           description = "Execute vmrun from its installation directory without having to have that on path";
-          body = ''"/Applications/VMware Fusion.app/Contents/Library/vmrun" $argv'';
+          body = ''"/Applications/VMware Fusion.app/Contents/Library/vmrun" -vp (security find-generic-password -s "$HOME/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/Windows 11 64-bit Arm.vmx" -w) $argv'';
         };
 
         start-windows-nogui = {
           description = "Start the well-known Windows VM using the password created by VMware Fusion";
-          body = ''vmrun -T fusion -vp (security find-generic-password -s "$HOME/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/Windows 11 64-bit Arm.vmx" -w) start "$HOME/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/" nogui'';
+          body = ''vmrun -T fusion start "$HOME/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/" nogui'';
         };
       };
 
       # ignored unless zsh is enabled
       zsh.initContent = ''
         vmrun() {
-          "/Applications/VMware Fusion.app/Contents/Library/vmrun" "$@"
+          "/Applications/VMware Fusion.app/Contents/Library/vmrun" -vp "$(security find-generic-password -s "$HOME/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/Windows 11 64-bit Arm.vmx" -w)" "$@"
         }
 
         start-windows-nogui() {
@@ -35,5 +35,10 @@ in
         }
       '';
     };
+
+    home.sessionVariables = {
+      WIN11VMX = "/Users/simon.guest/Virtual Machines.localized/Windows 11 64-bit Arm.vmwarevm/Windows 11 64-bit Arm.vmx";
+    };
+
   };
 }
