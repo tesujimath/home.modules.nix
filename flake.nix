@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dirge = {
+      url = "github:dirge-code/dirge/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     oh-my-pi = {
       url = "github:can1357/oh-my-pi/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,12 +34,13 @@
 
   outputs = inputs:
     let
-      inherit (inputs) nixpkgs home-manager systems bash-env-json oh-my-pi crit;
+      inherit (inputs) nixpkgs home-manager systems bash-env-json dirge oh-my-pi crit;
 
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       flakePkgsFor = system: {
         bash-env-json = bash-env-json.packages.${system}.default;
+        dirge = dirge.packages.${system}.default;
         oh-my-pi = oh-my-pi.packages.${system}.default;
         crit = crit.packages.${system}.default;
       };

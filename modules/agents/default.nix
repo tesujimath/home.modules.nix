@@ -8,6 +8,7 @@
     (import ./crit.nix { inherit flakePkgs; })
     ./cursor.nix
     ./deprecated.nix
+    (import ./dirge.nix { inherit flakePkgs; })
     ./goose.nix
     ./pi.nix
     ./skills.nix
