@@ -153,5 +153,10 @@ in
         inherit (cfg) credsStore;
       };
     };
+
+    programs.ssh = {
+      enable = true;
+      includes = [ "~/.colima/ssh_config" ];
+    };
   };
 }
