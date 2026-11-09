@@ -5,7 +5,7 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types;
   yamlFormat = pkgs.formats.yaml { };
 
-  # Colima only mounts $HOME into the VM, so the certificates are inlined
+  # The Nix store is not mounted into the VM, so the certificates are inlined
   # rather than referenced by path.  They are split one per file, without
   # surrounding text, as update-ca-certificates expects.
   installCaCertificates =
@@ -37,11 +37,13 @@ let
 
   colimaSettings = lib.recursiveUpdate
     {
-      inherit (cfg) cpu memory disk rosetta;
+      inherit (cfg) cpu memory disk rootDisk rosetta;
       # colima ignores the whole file if runtime is unset
       runtime = "docker";
       arch = "host";
       vmType = "vz";
+      # colima mounts nothing at all if mounts is unset
+      mounts = [ { location = "~"; writable = true; } ];
       mountType = "virtiofs";
       mountInotify = true;
       binfmt = true;
@@ -52,6 +54,14 @@ let
       };
     }
     cfg.extraSettings;
+
+  # colima restart would try to activate its Docker context, which fails on the read-only config.json
+  colima-restart = pkgs.writeShellApplication {
+    name = "colima-restart";
+    text = ''
+      launchctl kickstart -k "gui/$(id -u)/org.nix-community.home.colima-default"
+    '';
+  };
 in
 {
   options.tesujimath.docker = {
@@ -60,6 +70,8 @@ in
     cpu = mkOption { default = 4; type = types.int; description = "Number of CPUs for the Colima VM"; };
     memory = mkOption { default = 8; type = types.int; description = "Memory in GiB for the Colima VM"; };
     disk = mkOption { default = 100; type = types.int; description = "Disk size in GiB for the Colima VM"; };
+    # colima uses 0 if unset, which fails as an attempt to shrink an existing VM's disk
+    rootDisk = mkOption { default = 20; type = types.int; description = "Root filesystem disk size in GiB for the Colima VM, which cannot be shrunk"; };
 
     rosetta = mkOption {
       default = pkgs.stdenv.hostPlatform.isAarch64;
@@ -111,6 +123,7 @@ in
       docker
       docker-compose # for scripts which still use the standalone command
       docker-credential-helpers
+      colima-restart
     ];
 
     services.colima = {
