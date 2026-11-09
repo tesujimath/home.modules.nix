@@ -17,6 +17,7 @@ in
     (import ./modules/fish { inherit flakePkgs; })
     ./modules/fonts.nix
     ./modules/git
+    ./modules/github.nix
     ./modules/spacehammer
     ./modules/helix.nix
     ./modules/homebrew.nix
