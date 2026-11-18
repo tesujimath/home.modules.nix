@@ -43,6 +43,21 @@ in
           co = "pr checkout";
         };
       };
+
+      # ignored unless fish is enabled
+      fish.functions = {
+        gh-fetch-pr = {
+          description = "Fetch the PR specified by number from the remote";
+          body = ''git fetch origin pull/$argv[1]/head:pr-$argv[1]'';
+        };
+      };
+
+      # ignored unless zsh is enabled
+      zsh.initContent = ''
+        gh-fetch-pr() {
+          git fetch origin pull/"$1"/head:pr-"$1"
+        }
+      '';
     };
   };
 }
