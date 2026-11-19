@@ -15,7 +15,7 @@ let
       # languages whose support simply needs some packages are listed here;
       # more complex ones, such as clojure, are imported as modules
 
-      bash = [ bash-language-server shfmt ];
+      bash = [ bash-language-server shellcheck shfmt ];
 
       beancount = [ beancount-language-server ];
 
