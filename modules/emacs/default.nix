@@ -54,6 +54,9 @@ in
             mediainfo # audio/video metadata
             poppler-utils # pdftoppm for PDF preview
             vips # images
+
+            # preview for markdown
+            pandoc
           ];
 
           sessionVariables = {
