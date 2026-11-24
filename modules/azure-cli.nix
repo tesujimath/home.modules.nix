@@ -27,6 +27,7 @@ in
           azure-devops # official one caught up
           application-insights
           log-analytics
+          resource-graph
         ];
     };
 
